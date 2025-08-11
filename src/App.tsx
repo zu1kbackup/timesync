@@ -8,6 +8,7 @@ import { detectAnyDOMsOnMouseEvent } from "./utils";
 import { dismissDatePickerModelAtom } from "./atoms/date";
 import { readWriteUrlTimezonesNameAtom } from "./atoms/hash-url";
 import Navbar from "./components/NavBar";
+import { getCurrentUserTimezoneName } from "./utils/timezones";
 
 function App() {
   const [, setSearchTimezoneName] = useAtom(setSearchTimezoneNameAtom);
@@ -22,11 +23,22 @@ function App() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (!urlTimezonesName.length) {
-        setUrlTimezonesName([
+        const userTimezone = getCurrentUserTimezoneName();
+        const otherDefaultTimezones = [
           "Asia/Shanghai",
           "Asia/Riyadh",
           "America/Sao_Paulo",
-        ]);
+        ];
+
+        // 当地时区放在第一位，然后添加其他默认时区（如果不重复的话）
+        const finalTimezones = [userTimezone];
+        otherDefaultTimezones.forEach((tz) => {
+          if (tz !== userTimezone) {
+            finalTimezones.push(tz);
+          }
+        });
+
+        setUrlTimezonesName(finalTimezones);
       }
     }, 500);
 
