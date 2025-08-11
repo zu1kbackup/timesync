@@ -8,24 +8,25 @@ import { detectAnyDOMsOnMouseEvent } from "./utils";
 import { dismissDatePickerModelAtom } from "./atoms/date";
 import { readWriteUrlTimezonesNameAtom } from "./atoms/hash-url";
 import Navbar from "./components/NavBar";
-import { getCurrentUserTimezoneName } from "./utils/timezones";
-import Descriptions from "./components/Descriptions";
-import MainFooter from "./components/MainFooter";
 
 function App() {
   const [, setSearchTimezoneName] = useAtom(setSearchTimezoneNameAtom);
   const [, dismissDatePickerModel] = useAtom(dismissDatePickerModelAtom);
   const [, syncUrlToSelectedTimezones] = useAtom(
-    syncUrlToSelectedTimezonesAtom
+    syncUrlToSelectedTimezonesAtom,
   );
   const [urlTimezonesName, setUrlTimezonesName] = useAtom(
-    readWriteUrlTimezonesNameAtom
+    readWriteUrlTimezonesNameAtom,
   );
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (!urlTimezonesName.length) {
-        setUrlTimezonesName(getCurrentUserTimezoneName());
+        setUrlTimezonesName([
+          "Asia/Shanghai",
+          "Asia/Riyadh",
+          "America/Sao_Paulo",
+        ]);
       }
     }, 500);
 
@@ -61,9 +62,7 @@ function App() {
             <TimezonesBoard />
           </div>
         </div>
-        <Descriptions />
       </main>
-      <MainFooter />
     </div>
   );
 }

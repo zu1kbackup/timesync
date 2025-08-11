@@ -1,7 +1,6 @@
 import { switchTheme, isDarkMode } from "~/utils/switch-theme";
 import { Sun, MoonStar } from "lucide-react";
 import { useToggle } from "~/utils/hooks/use-toggle";
-import GithubLink from "./GithubLink";
 
 export default function Navbar() {
   const [value, toggle] = useToggle(isDarkMode());
@@ -18,7 +17,6 @@ export default function Navbar() {
         <h3 className="text-zinc-400">what time works for you?</h3>
       </div>
       <div className="flex items-center gap-3">
-        <GithubLink />
         <button
           className="hover:text-gray-400 transition-colors primary_border rounded-full p-2 shadow-sm bg-white dark:bg-zinc-900"
           onClick={handleSwitchTheme}
