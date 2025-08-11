@@ -1,0 +1,12 @@
+name = "timesync"
+compatibility_date = "2024-08-01"
+
+[env.production]
+name = "timesync-production"
+
+pages_build_output_dir = "dist"
+
+[build]
+command = "bun run build"
+cwd = "."
+watch_dir = "src"
