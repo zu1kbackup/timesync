@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "t": "node --loader ts-node/esm examples/test.ts",
-    "deploy": "wrangler pages deploy dist",
+    "deploy": "wrangler pages deploy dist --project-name timesync",
     "pages:dev": "wrangler pages dev dist",
     "cf:login": "wrangler login"
   },
